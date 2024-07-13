@@ -8,6 +8,13 @@ if not defined CURL (
 echo CURL not found
 exit /b
 )
+if exist C:\mingw1120_64\bin\gcc.exe goto mingw1120_end
+pushd %~dp0
+    if not exist x86_64-11.2.0-release-posix-seh-rt_v9-rev3.7z "%CURL%" -L -o x86_64-11.2.0-release-posix-seh-rt_v9-rev3.7z https://github.com/cristianadam/mingw-builds/releases/download/v11.2.0-rev3/x86_64-11.2.0-release-posix-seh-rt_v9-rev3.7z
+    7z x -y -oC:\ x86_64-11.2.0-release-posix-seh-rt_v9-rev3.7z
+    move C:\mingw64 C:\mingw1120_64
+popd
+:mingw1120_end
 if exist C:\antlr4\mingw1120_64\bin\libantlr4-runtime.dll goto antlr4runtime_end
 pushd %~dp0
     if not exist antlr4 git clone https://github.com/antlr/antlr4.git
@@ -21,13 +28,6 @@ pushd %~dp0
     popd
 popd
 :antlr4runtime_end
-if exist C:\mingw1120_64\bin\gcc.exe goto mingw1120_end
-pushd %~dp0
-    if not exist x86_64-11.2.0-release-posix-seh-rt_v9-rev3.7z "%CURL%" -L -o x86_64-11.2.0-release-posix-seh-rt_v9-rev3.7z https://github.com/cristianadam/mingw-builds/releases/download/v11.2.0-rev3/x86_64-11.2.0-release-posix-seh-rt_v9-rev3.7z
-    7z x -y -oC:\ x86_64-11.2.0-release-posix-seh-rt_v9-rev3.7z
-    move C:\mingw64 C:\mingw1120_64
-popd
-:mingw1120_end
 if exist "%USERPROFILE%\.m2\repository\org\antlr\antlr4\4.13.1\antlr4-4.13.1-complete.jar" goto antlr4jar_end
 if not exist "%USERPROFILE%\.m2\repository\org\antlr\antlr4\4.13.1" mkdir "%USERPROFILE%\.m2\repository\org\antlr\antlr4\4.13.1"
 pushd "%USERPROFILE%\.m2\repository\org\antlr\antlr4\4.13.1"
