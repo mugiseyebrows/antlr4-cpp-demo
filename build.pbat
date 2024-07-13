@@ -37,11 +37,12 @@ def main depends on mingw1120 and antlr4runtime and antlr4jar
     use(ninja)
     add_path(C:\antlr4\mingw1120_64\bin)
     github_checkout()
+    github_setup_java(temurin, 21)
     pushd_cd()
         mkdir(build)
         pushd build
             cmake -G Ninja -D CMAKE_C_COMPILER=gcc -D CMAKE_CXX_COMPILER=g++ -D CMAKE_PREFIX_PATH=C:\antlr4\mingw1120_64 ..
-            cmake --build .
+            cmake --build . --parallel
             main
         popd
     popd

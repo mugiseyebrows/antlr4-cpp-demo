@@ -6,13 +6,18 @@ jobs:
     steps:
     - name: checkout
       uses: actions/checkout@v4
+    - name: setup java
+      uses: actions/setup-java@v4
+      with:
+        distribution: temurin
+        java-version: '21'
     - name: cache C:\mingw1120_64
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       with:
         path: C:\mingw1120_64
         key: mingw1120_64
     - name: cache C:\antlr4\mingw1120_64
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       with:
         path: C:\antlr4\mingw1120_64
         key: antlr4runtime
@@ -63,7 +68,7 @@ jobs:
             if not exist "build" mkdir "build"
             pushd build
                 cmake -G Ninja -D CMAKE_C_COMPILER=gcc -D CMAKE_CXX_COMPILER=g++ -D CMAKE_PREFIX_PATH=C:\antlr4\mingw1120_64 ..
-                cmake --build .
+                cmake --build . --parallel
                 main
             popd
         popd

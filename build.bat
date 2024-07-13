@@ -38,7 +38,7 @@ pushd %~dp0
     if not exist "build" mkdir "build"
     pushd build
         cmake -G Ninja -D CMAKE_C_COMPILER=gcc -D CMAKE_CXX_COMPILER=g++ -D CMAKE_PREFIX_PATH=C:\antlr4\mingw1120_64 ..
-        cmake --build .
+        cmake --build . --parallel
         main
     popd
 popd
