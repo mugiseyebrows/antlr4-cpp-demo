@@ -29,9 +29,7 @@ def antlr4runtime depends on mingw1120
 def antlr4jar
     if_exist_return(%USERPROFILE%\.m2\repository\org\antlr\antlr4\4.13.1\antlr4-4.13.1-complete.jar)
     mkdir(%USERPROFILE%\.m2\repository\org\antlr\antlr4\4.13.1)
-    pushd "%USERPROFILE%\.m2\repository\org\antlr\antlr4\4.13.1"
-        download(https://repo1.maven.org/maven2/org/antlr/antlr4/4.13.1/antlr4-4.13.1-complete.jar)
-    popd
+    download(https://repo1.maven.org/maven2/org/antlr/antlr4/4.13.1/antlr4-4.13.1-complete.jar, %USERPROFILE%\.m2\repository\org\antlr\antlr4\4.13.1\antlr4-4.13.1-complete.jar)
 
 def main depends on mingw1120 and antlr4runtime and antlr4jar
     use(ninja)

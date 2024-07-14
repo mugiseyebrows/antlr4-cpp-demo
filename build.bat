@@ -30,9 +30,7 @@ popd
 :antlr4runtime_end
 if exist "%USERPROFILE%\.m2\repository\org\antlr\antlr4\4.13.1\antlr4-4.13.1-complete.jar" goto antlr4jar_end
 if not exist "%USERPROFILE%\.m2\repository\org\antlr\antlr4\4.13.1" mkdir "%USERPROFILE%\.m2\repository\org\antlr\antlr4\4.13.1"
-pushd "%USERPROFILE%\.m2\repository\org\antlr\antlr4\4.13.1"
-    "%CURL%" -L -o antlr4-4.13.1-complete.jar https://repo1.maven.org/maven2/org/antlr/antlr4/4.13.1/antlr4-4.13.1-complete.jar
-popd
+"%CURL%" -L -o "%USERPROFILE%\.m2\repository\org\antlr\antlr4\4.13.1\antlr4-4.13.1-complete.jar" https://repo1.maven.org/maven2/org/antlr/antlr4/4.13.1/antlr4-4.13.1-complete.jar
 :antlr4jar_end
 pushd %~dp0
     if not exist "build" mkdir "build"
