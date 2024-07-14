@@ -27,7 +27,7 @@ def antlr4runtime depends on mingw1120
     popd
 
 def antlr4jar
-    echo USERPROFILE %USERPROFILE%
+    github_cache(C:\Users\runneradmin\.m2\repository\org\antlr\antlr4\4.13.1, :k=antlr4-4.13.1-complete)
     mkdir(%USERPROFILE%\.m2\repository\org\antlr\antlr4\4.13.1)
     download(https://repo1.maven.org/maven2/org/antlr/antlr4/4.13.1/antlr4-4.13.1-complete.jar, %USERPROFILE%\.m2\repository\org\antlr\antlr4\4.13.1\antlr4-4.13.1-complete.jar, :cache)
 
