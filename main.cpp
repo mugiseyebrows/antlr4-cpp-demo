@@ -16,8 +16,6 @@
 #include "TLexer.h"
 #include "TParser.h"
 
-#include <Windows.h>
-
 #pragma execution_character_set("utf-8")
 
 using namespace antlrcpptest;
