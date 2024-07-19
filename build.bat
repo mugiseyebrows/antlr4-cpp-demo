@@ -14,7 +14,7 @@ if not exist antlr4 git clone https://github.com/antlr/antlr4.git
 pushd antlr4\runtime\Cpp
     if not exist build mkdir build
     pushd build
-        cmake -G Ninja -D CMAKE_C_COMPILER=gcc -D CMAKE_CXX_COMPILER=g++ -D CMAKE_INSTALL_PREFIX=C:/antlr4/mingw1220_64 ..
+        cmake -G Ninja -D CMAKE_C_COMPILER=gcc -D CMAKE_CXX_COMPILER=g++ -D CMAKE_BUILD_TYPE=Release -D CMAKE_INSTALL_PREFIX=C:/antlr4/mingw1220_64 ..
         cmake --build . --parallel
         cmake --install .
     popd
@@ -24,7 +24,8 @@ if not exist "%USERPROFILE%\.m2\repository\org\antlr\antlr4\4.13.1" mkdir "%USER
 if not exist "%USERPROFILE%\.m2\repository\org\antlr\antlr4\4.13.1\antlr4-4.13.1-complete.jar" curl -L -o "%USERPROFILE%\.m2\repository\org\antlr\antlr4\4.13.1\antlr4-4.13.1-complete.jar" https://repo1.maven.org/maven2/org/antlr/antlr4/4.13.1/antlr4-4.13.1-complete.jar
 if not exist build mkdir build
 pushd build
-    cmake -G Ninja -D CMAKE_C_COMPILER=gcc -D CMAKE_CXX_COMPILER=g++ -D CMAKE_PREFIX_PATH=C:/antlr4/mingw1220_64 ..
+    cmake -G Ninja -D CMAKE_C_COMPILER=gcc -D CMAKE_CXX_COMPILER=g++ -D CMAKE_BUILD_TYPE=Release -D CMAKE_PREFIX_PATH=C:/antlr4/mingw1220_64 ..
     cmake --build . --parallel
     main
 popd
+build\main
