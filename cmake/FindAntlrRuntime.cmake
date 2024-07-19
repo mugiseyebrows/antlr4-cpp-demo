@@ -16,24 +16,15 @@ endif()
 find_package(Java)
 
 function(antlr_generate)
-    set(_lexer_name ${ARGV0})
-    set(_parser_name ${ARGV1})
-    set(_namespace ${ARGV2})
-    if (NOT Java_JAVA_EXECUTABLE)
-        message("Java not found, cannot generate lexer and parser")
-    endif()
-    if (NOT ANTLR_JAR)
-        message("Antlr jar not found, cannot generate lexer and parser")
-    endif()
-    if (Java_JAVA_EXECUTABLE AND ANTLR_JAR)
-        # -listener -visitor
-        add_custom_command(
-            WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-            OUTPUT "${CMAKE_CURRENT_SOURCE_DIR}/generated/${_lexer_name}.cpp" "${CMAKE_CURRENT_SOURCE_DIR}/generated/${_parser_name}.cpp"
-            DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/${_lexer_name}.g4" "${CMAKE_CURRENT_SOURCE_DIR}/${_parser_name}.g4"
-            COMMAND ${Java_JAVA_EXECUTABLE} -jar ${ANTLR_JAR} -Dlanguage=Cpp -o generated/ -package ${_namespace} "${_lexer_name}.g4" "${_parser_name}.g4"
-        )
-    endif()
+    set(options)
+    set(oneValueArgs LEXER PARSER NAMESPACE)
+    set(multiValueArgs)
+    cmake_parse_arguments(NAME "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
+    add_custom_command(
+        OUTPUT "${NAME_LEXER}.cpp" "${NAME_PARSER}.cpp"
+        DEPENDS "${NAME_LEXER}.g4" "${NAME_PARSER}.g4"
+        COMMAND ${Java_JAVA_EXECUTABLE} -jar ${ANTLR_JAR} -Dlanguage=Cpp -package ${NAME_NAMESPACE} "${CMAKE_CURRENT_SOURCE_DIR}/${NAME_LEXER}.g4" "${CMAKE_CURRENT_SOURCE_DIR}/${NAME_PARSER}.g4"
+    )
 endfunction()
 
 message(STATUS "ANTLR_JAR ${ANTLR_JAR}")
