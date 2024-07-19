@@ -26,6 +26,5 @@ if not exist build mkdir build
 pushd build
     cmake -G Ninja -D CMAKE_C_COMPILER=gcc -D CMAKE_CXX_COMPILER=g++ -D CMAKE_BUILD_TYPE=Release -D CMAKE_PREFIX_PATH=C:/antlr4/mingw1220_64 ..
     cmake --build . --parallel
-    main
 popd
 build\main
