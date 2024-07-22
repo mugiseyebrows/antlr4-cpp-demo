@@ -1,8 +1,8 @@
 @echo off
 rem This file is generated from build-on-windows.pbat, all edits will be lost
 set PATH=C:\mingw1220_64\bin;C:\mingw64\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\mingw32\bin;C:\Windows\System32;C:\Program Files\7-Zip;C:\Program Files\CMake\bin;C:\Program Files\Meson;C:\Program Files\Git\cmd;C:\antlr4\mingw1220_64\bin;%PATH%
-:: mingw64 12.2.0 installed in C:\mingw64
-gcc -v
+:: mingw64 12.2.0 is installed in C:\mingw64
+where gcc > NUL 2>&1 && gcc -v
 if exist C:\mingw1220_64\bin\gcc.exe goto mingw1220_end
 if exist C:\mingw64\bin\gcc.exe goto mingw1220_end
 if not exist x86_64-12.1.0-release-posix-seh-rt_v10-rev0.7z curl -L -o x86_64-12.1.0-release-posix-seh-rt_v10-rev0.7z https://github.com/cristianadam/mingw-builds/releases/download/v12.1.0-rev0/x86_64-12.1.0-release-posix-seh-rt_v10-rev0.7z

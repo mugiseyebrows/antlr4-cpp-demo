@@ -1,6 +1,6 @@
 def mingw1220
-    :: mingw64 12.2.0 installed in C:\mingw64
-    gcc -v
+    :: mingw64 12.2.0 is installed in C:\mingw64
+    where gcc > NUL 2>&1 && gcc -v
     use(mingw, 12)
     if_exist_return(C:\mingw1220_64\bin\gcc.exe)
     if_exist_return(C:\mingw64\bin\gcc.exe)
