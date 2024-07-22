@@ -1,0 +1,33 @@
+def antlr4runtime
+    use(cmake)
+    use(ninja)
+    git_clone(https://github.com/antlr/antlr4.git)
+    pushd antlr4/runtime/Cpp
+        mkdir(build)
+        pushd build
+            cmake -G Ninja -D CMAKE_BUILD_TYPE=Release ..
+            cmake --build . --parallel
+            sudo cmake --install .
+        popd
+    popd
+
+def antlr4jar
+    mkdir(~/.m2/repository/org/antlr/antlr4/4.13.1)
+    download(https://repo1.maven.org/maven2/org/antlr/antlr4/4.13.1/antlr4-4.13.1-complete.jar, ~/.m2/repository/org/antlr/antlr4/4.13.1/antlr4-4.13.1-complete.jar, :cache)
+
+def build depends on antlr4runtime and antlr4jar
+    use(cmake)
+    use(ninja)
+    github_checkout()
+    github_setup_java(temurin, 21)
+    mkdir(build)
+    pushd build
+        cmake -G Ninja -D CMAKE_BUILD_TYPE=Release ..
+        cmake --build . --parallel
+    popd
+
+def run depends on build
+    build/main
+
+os ubuntu
+github-workflow 1
