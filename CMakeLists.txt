@@ -8,9 +8,9 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
 find_package(AntlrRuntime)
 
-antlr_generate(LEXER TLexer PARSER TParser NAMESPACE antlrcpptest)
+antlr_generate(LEXER TLexer PARSER TParser NAMESPACE antlrcpptest OUT generated)
 
-add_executable(main TLexer.cpp TParser.cpp main.cpp)
+add_executable(main ${generated} main.cpp)
 
 target_include_directories(main PRIVATE ${CMAKE_CURRENT_BINARY_DIR} ${ANTLR_RUNTIME_INCLUDE_DIR})
 
