@@ -12,7 +12,7 @@ jobs:
         distribution: temurin
         java-version: '21'
     - name: antlr4runtime
-      shell: cmd
+      shell: bash
       run: |
         if [[ ! -e antlr4 ]]; then
             git clone https://github.com/antlr/antlr4.git
@@ -28,7 +28,7 @@ jobs:
             popd
         popd
     - name: antlr4jar
-      shell: cmd
+      shell: bash
       run: |
         if [[ ! -e ~/.m2/repository/org/antlr/antlr4/4.13.1 ]]; then
             mkdir ~/.m2/repository/org/antlr/antlr4/4.13.1
@@ -37,7 +37,7 @@ jobs:
             curl -L -o ~/.m2/repository/org/antlr/antlr4/4.13.1/antlr4-4.13.1-complete.jar https://repo1.maven.org/maven2/org/antlr/antlr4/4.13.1/antlr4-4.13.1-complete.jar
         fi
     - name: build
-      shell: cmd
+      shell: bash
       run: |
         if [[ ! -e build ]]; then
             mkdir build
@@ -47,5 +47,5 @@ jobs:
             cmake --build . --parallel
         popd
     - name: run
-      shell: cmd
+      shell: bash
       run: build/main
