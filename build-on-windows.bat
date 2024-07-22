@@ -12,9 +12,7 @@ move C:\mingw64 C:\mingw1220_64
 if exist C:\antlr4\mingw1220_64\bin\libantlr4-runtime.dll goto antlr4runtime_end
 if not exist antlr4 git clone https://github.com/antlr/antlr4.git
 pushd antlr4\runtime\Cpp
-    if [[ ! -e build ]]; then
-        mkdir build
-    fi
+    if not exist build mkdir build
     pushd build
         cmake -G Ninja -D CMAKE_C_COMPILER=gcc -D CMAKE_CXX_COMPILER=g++ -D CMAKE_BUILD_TYPE=Release -D CMAKE_INSTALL_PREFIX=C:/antlr4/mingw1220_64 ..
         cmake --build . --parallel
@@ -22,13 +20,9 @@ pushd antlr4\runtime\Cpp
     popd
 popd
 :antlr4runtime_end
-if [[ ! -e "%USERPROFILE%\.m2\repository\org\antlr\antlr4\4.13.1" ]]; then
-    mkdir "%USERPROFILE%\.m2\repository\org\antlr\antlr4\4.13.1"
-fi
+if not exist "%USERPROFILE%\.m2\repository\org\antlr\antlr4\4.13.1" mkdir "%USERPROFILE%\.m2\repository\org\antlr\antlr4\4.13.1"
 if not exist "%USERPROFILE%\.m2\repository\org\antlr\antlr4\4.13.1\antlr4-4.13.1-complete.jar" curl -L -o "%USERPROFILE%\.m2\repository\org\antlr\antlr4\4.13.1\antlr4-4.13.1-complete.jar" https://repo1.maven.org/maven2/org/antlr/antlr4/4.13.1/antlr4-4.13.1-complete.jar
-if [[ ! -e build ]]; then
-    mkdir build
-fi
+if not exist build mkdir build
 pushd build
     cmake -G Ninja -D CMAKE_C_COMPILER=gcc -D CMAKE_CXX_COMPILER=g++ -D CMAKE_BUILD_TYPE=Release -D CMAKE_PREFIX_PATH=C:/antlr4/mingw1220_64 ..
     cmake --build . --parallel
