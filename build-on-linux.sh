@@ -8,7 +8,7 @@ pushd antlr4/runtime/Cpp
         mkdir build
     fi
     pushd build
-        cmake -G Ninja -D CMAKE_BUILD_TYPE=Release ..
+        cmake -D CMAKE_BUILD_TYPE=Release ..
         cmake --build . --parallel
         sudo cmake --install .
     popd
@@ -23,7 +23,7 @@ if [[ ! -e build ]]; then
     mkdir build
 fi
 pushd build
-    cmake -G Ninja -D CMAKE_BUILD_TYPE=Release ..
+    cmake -D CMAKE_BUILD_TYPE=Release ..
     cmake --build . --parallel
 popd
 build/main

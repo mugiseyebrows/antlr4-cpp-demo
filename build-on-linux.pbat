@@ -5,7 +5,7 @@ def antlr4runtime
     pushd antlr4/runtime/Cpp
         mkdir(build)
         pushd build
-            cmake -G Ninja -D CMAKE_BUILD_TYPE=Release ..
+            cmake -D CMAKE_BUILD_TYPE=Release ..
             cmake --build . --parallel
             sudo cmake --install .
         popd
@@ -22,7 +22,7 @@ def build depends on antlr4runtime and antlr4jar
     github_setup_java(temurin, 21)
     mkdir(build)
     pushd build
-        cmake -G Ninja -D CMAKE_BUILD_TYPE=Release ..
+        cmake -D CMAKE_BUILD_TYPE=Release ..
         cmake --build . --parallel
     popd
 

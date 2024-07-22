@@ -22,7 +22,7 @@ jobs:
                 mkdir build
             fi
             pushd build
-                cmake -G Ninja -D CMAKE_BUILD_TYPE=Release ..
+                cmake -D CMAKE_BUILD_TYPE=Release ..
                 cmake --build . --parallel
                 sudo cmake --install .
             popd
@@ -43,7 +43,7 @@ jobs:
             mkdir build
         fi
         pushd build
-            cmake -G Ninja -D CMAKE_BUILD_TYPE=Release ..
+            cmake -D CMAKE_BUILD_TYPE=Release ..
             cmake --build . --parallel
         popd
     - name: run
