@@ -16,14 +16,27 @@ endif()
 find_package(Java)
 
 function(antlr_generate)
-    set(options)
+    set(options LISTENER VISITOR)
     set(oneValueArgs LEXER PARSER NAMESPACE)
     set(multiValueArgs)
-    cmake_parse_arguments(NAME "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
+    cmake_parse_arguments(ARG "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
+
+    set(cmd_args -jar ${ANTLR_JAR} -o . -Dlanguage=Cpp -package ${ARG_NAMESPACE} "${CMAKE_CURRENT_SOURCE_DIR}/${ARG_LEXER}.g4" "${CMAKE_CURRENT_SOURCE_DIR}/${ARG_PARSER}.g4")
+    if (ARG_LISTENER)
+        list(APPEND cmd_args -listener)
+    else()
+        list(APPEND cmd_args -no-listener)
+    endif()
+    if (ARG_VISITOR)
+        list(APPEND cmd_args -visitor)
+    else()
+        list(APPEND cmd_args -no-visitor)
+    endif()
+
     add_custom_command(
-        OUTPUT "${NAME_LEXER}.cpp" "${NAME_PARSER}.cpp"
-        DEPENDS "${NAME_LEXER}.g4" "${NAME_PARSER}.g4"
-        COMMAND ${Java_JAVA_EXECUTABLE} -jar ${ANTLR_JAR} -Dlanguage=Cpp -package ${NAME_NAMESPACE} "${CMAKE_CURRENT_SOURCE_DIR}/${NAME_LEXER}.g4" "${CMAKE_CURRENT_SOURCE_DIR}/${NAME_PARSER}.g4"
+        OUTPUT "${ARG_LEXER}.cpp" "${ARG_PARSER}.cpp"
+        DEPENDS "${ARG_LEXER}.g4" "${ARG_PARSER}.g4"
+        COMMAND ${Java_JAVA_EXECUTABLE} ARGS ${cmd_args}
     )
 endfunction()
 
