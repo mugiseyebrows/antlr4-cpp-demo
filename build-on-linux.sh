@@ -4,24 +4,18 @@ if [[ ! -e antlr4 ]]; then
     git clone https://github.com/antlr/antlr4.git
 fi
 pushd antlr4/runtime/Cpp
-    if [[ ! -e build ]]; then
-        mkdir build
-    fi
+    mkdir -p build
     pushd build
         cmake -D CMAKE_BUILD_TYPE=Release ..
         cmake --build . --parallel
         sudo cmake --install .
     popd
 popd
-if [[ ! -e ~/.m2/repository/org/antlr/antlr4/4.13.1 ]]; then
-    mkdir ~/.m2/repository/org/antlr/antlr4/4.13.1
-fi
+mkdir -p ~/.m2/repository/org/antlr/antlr4/4.13.1
 if [[ ! -e ~/.m2/repository/org/antlr/antlr4/4.13.1/antlr4-4.13.1-complete.jar ]]; then
     curl -L -o ~/.m2/repository/org/antlr/antlr4/4.13.1/antlr4-4.13.1-complete.jar https://repo1.maven.org/maven2/org/antlr/antlr4/4.13.1/antlr4-4.13.1-complete.jar
 fi
-if [[ ! -e build ]]; then
-    mkdir build
-fi
+mkdir -p build
 pushd build
     cmake -D CMAKE_BUILD_TYPE=Release ..
     cmake --build . --parallel

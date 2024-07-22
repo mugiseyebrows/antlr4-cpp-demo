@@ -1,19 +1,18 @@
 def mingw1220
     :: mingw64 12.2.0 installed in C:\mingw64
     gcc -v
-    add_path(C:\mingw64\bin)
-    add_path(C:\mingw1220_64\bin)
+    use(mingw, 12)
     if_exist_return(C:\mingw1220_64\bin\gcc.exe)
     if_exist_return(C:\mingw64\bin\gcc.exe)
-    download(https://github.com/cristianadam/mingw-builds/releases/download/v11.2.0-rev3/x86_64-11.2.0-release-posix-seh-rt_v9-rev3.7z, :cache)
+    # download(https://github.com/cristianadam/mingw-builds/releases/download/v11.2.0-rev3/x86_64-11.2.0-release-posix-seh-rt_v9-rev3.7z, :cache)
+    download(https://github.com/cristianadam/mingw-builds/releases/download/v12.1.0-rev0/x86_64-12.1.0-release-posix-seh-rt_v10-rev0.7z, :cache)
     unzip(x86_64-11.2.0-release-posix-seh-rt_v9-rev3.7z, :o=C:\)
     move C:\mingw64 C:\mingw1220_64
 
 def antlr4runtime depends on mingw1220
     github_cache(C:\antlr4\mingw1220_64, :k=antlr4runtime)
     if_exist_return(C:\antlr4\mingw1220_64\bin\libantlr4-runtime.dll)
-    add_path(C:\mingw64\bin)
-    add_path(C:\mingw1220_64\bin)
+    use(mingw, 12)
     use(cmake)
     use(ninja)
     git_clone(https://github.com/antlr/antlr4.git)
@@ -34,8 +33,7 @@ def antlr4jar
 def build depends on mingw1220 and antlr4runtime and antlr4jar
     use(cmake)
     use(ninja)
-    add_path(C:\mingw64\bin)
-    add_path(C:\mingw1220_64\bin)
+    use(mingw, 12)
     add_path(C:\antlr4\mingw1220_64\bin)
     github_checkout()
     github_setup_java(temurin, 21)
@@ -46,8 +44,7 @@ def build depends on mingw1220 and antlr4runtime and antlr4jar
     popd
 
 def run depends on build
-    add_path(C:\mingw64\bin)
-    add_path(C:\mingw1220_64\bin)
+    use(mingw, 12)
     add_path(C:\antlr4\mingw1220_64\bin)
     build\main
     
